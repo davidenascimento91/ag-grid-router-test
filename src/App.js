@@ -64,6 +64,7 @@ const App = () => {
     const model = getFiltersFromQueryParams(params);
     const gridOptions = gridRef.current;
     gridOptions.api.setFilterModel(model);
+    gridOptions.api.sizeColumnsToFit();
   };
 
   // Example load data from sever
@@ -73,18 +74,10 @@ const App = () => {
       .then((rowData) => setRowData(rowData));
   }, []);
 
-  // Example using Grid's API
-  const buttonListener = useCallback((e) => {
-    gridRef.current.api.deselectAll();
-  }, []);
-
   return (
     <div>
-      {/* Example using Grid's API */}
-      <button onClick={buttonListener}>Push Me</button>
-
       {/* On div wrapping Grid a) specify theme CSS Class Class and b) sets Grid size */}
-      <div className="ag-theme-alpine" style={{ width: 500, height: 500 }}>
+      <div className="ag-theme-alpine" style={{ height: 500 }}>
         <AgGridReact
           ref={gridRef} // Ref for accessing Grid's API
           rowData={rowData} // Row Data for Rows
